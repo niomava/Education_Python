@@ -7,8 +7,8 @@ while True:
     if s == 'q': break
 
     if s not in ('+', '-', '*', '/'):
-            print("неверный знак")
-            continue
+        print("неверный знак")
+        continue
             
     x = float(input("Введите x: "))
     y = float(input("Введите y: "))
