@@ -9,7 +9,7 @@ symbols_g = '%?*-=+$#№@!~`^(){}[];:,.<>_/\\ '
 
 length = int(input('Введите количество символов пароля '))
 
-i, l, u, s = True, True, True, True
+i=l=u=s = True
 
 Password_g = ''
 
