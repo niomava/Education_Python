@@ -23,8 +23,8 @@ if s:
     Password_g += symbols_g
 
 for p in range(1):
-    password_generate = ''.join(random.sample(Password_g, length))
-    print('PASSWORD:',password_generate)
+    password_generate = random.sample(Password_g, length)
+    print('PASSWORD:',''.join(password_generate))
     print('Пароль сгенерирован')
 
     while True:
