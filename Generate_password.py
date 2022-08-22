@@ -22,8 +22,6 @@ if u:
 if s:
     Password_g += symbols_g
 
-count_g = length
-
 for p in range(1):
     password_generate = ''.join(random.sample(Password_g, length))
     print('PASSWORD:',password_generate)
