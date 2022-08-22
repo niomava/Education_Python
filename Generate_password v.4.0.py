@@ -1,11 +1,12 @@
 print('(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ ГЕНЕРАТОР ПАРОЛЯ V.4.0', '*' * 5)
 
 import random
+import string
 
-integer_g = '0123456789'
-lowercase_g = 'qwertyuiopasdfghjklzxcvbnm'
-uppercase_g = 'QWERTYUIOPASDFGHJKLZXCVBNM'
-symbols_g = '%?*-=+$#№@!~`^(){}[];:,.<>_/\\ '
+integer_g = string.digits
+lowercase_g = string.ascii_lowercase
+uppercase_g = string.ascii_uppercase
+symbols_g = string.punctuation
 
 length = int(input('Введите количество символов пароля '))
 amount_p = int(input('Введите количество сгенерированных паролей '))
