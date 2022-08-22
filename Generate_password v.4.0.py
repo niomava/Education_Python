@@ -3,11 +3,6 @@ print('(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ ГЕНЕРАТОР ПАРОЛЯ V.4.0', '*' 
 import random
 import string
 
-integer_g = string.digits
-lowercase_g = string.ascii_lowercase
-uppercase_g = string.ascii_uppercase
-symbols_g = string.punctuation
-
 length = int(input('Введите количество символов пароля '))
 amount_p = int(input('Введите количество сгенерированных паролей '))
 
@@ -24,16 +19,16 @@ s = bool(input('Пароль должен содержать символы? '))
 Password_g = ''
 
 if i:
-    Password_g += integer_g
+    Password_g += string.digits
 
 if l:
-    Password_g += lowercase_g
+    Password_g += string.ascii_lowercase
 
 if u:
-    Password_g += uppercase_g
+    Password_g += string.ascii_uppercase
 
 if s:
-    Password_g += symbols_g
+    Password_g += string.punctuation
 
 
 for p in range(amount_p):
