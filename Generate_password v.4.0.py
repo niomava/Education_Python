@@ -31,7 +31,7 @@ if l:
 if u:
     Password_g += uppercase_g
 
-if:
+if s:
     Password_g += symbols_g
 
 
