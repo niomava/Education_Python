@@ -1,15 +1,44 @@
-print('(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ ГЕНЕРАТОР ПАРОЛЯ', '*' * 20)
+print('(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ ГЕНЕРАТОР ПАРОЛЯ V.4.0', '*' * 20)
 
 import random
 
-length = int(input('Введите количество символов пароля '))
-amount_p = int(input('Введите количество паролей для генерации '))
-Password_g = input('Введите символы для генерации ')
-pswrd = random.choice(Password_g)
+integer_g = '0123456789'
+lowercase_g = 'qwertyuiopasdfghjklzxcvbnm'
+uppercase_g = 'QWERTYUIOPASDFGHJKLZXCVBNM'
+symbols_g = '%?*-=+$#№@!~`^(){}[];:,.<>_/\\ '
 
-for p in range(amount_p):
+length = int(input('Введите количество символов пароля '))
+count_p = int(input('Введите количество сгенерированных паролей '))
+
+print('*** Для подтверждения конфигурации пароля введите (y) для отмены (n) ***')
+
+i = bool(input('Пароль должен содержать числа? '))
+
+l = bool(input('Пароль должен содержать латинские буквы нижнего регистра? '))
+
+u = bool(input('Пароль должен содержать латинские буквы верхнего регистра? '))
+
+s = bool(input('Пароль должен содержат символы? '))
+
+Password_g = ''
+
+if i== True:
+    Password_g += integer_g
+elif i == False:
+    Password_g != integer_g
+if l ==True:
+    Password_g += lowercase_g
+elif l==False:
+    Password_g != lowercase_g
+if u == True:
+    Password_g += uppercase_g
+elif u == False:
+    Password_g != uppercase_g
+if s==True:
+    Password_g += symbols_g
+elif s== False:
+    Password_g != symbols_g
+
+for p in range(count_p):
     password_generate = random.sample(Password_g, length)
     print('PASSWORD:', ''.join(password_generate))
-
-
-
