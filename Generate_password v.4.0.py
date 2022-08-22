@@ -24,20 +24,16 @@ Password_g = ''
 
 if i== True:
     Password_g += integer_g
-elif i == False:
-    Password_g != integer_g
+
 if l ==True:
     Password_g += lowercase_g
-elif l==False:
-    Password_g != lowercase_g
+
 if u == True:
     Password_g += uppercase_g
-elif u == False:
-    Password_g != uppercase_g
+
 if s==True:
     Password_g += symbols_g
-elif s== False:
-    Password_g != symbols_g
+
 
 for p in range(count_p):
     password_generate = random.sample(Password_g, length)
