@@ -22,16 +22,16 @@ s = bool(input('Пароль должен содержат символы? '))
 
 Password_g = ''
 
-if i== True:
+if i:
     Password_g += integer_g
 
-if l ==True:
+if l:
     Password_g += lowercase_g
 
-if u == True:
+if u:
     Password_g += uppercase_g
 
-if s==True:
+if:
     Password_g += symbols_g
 
 
