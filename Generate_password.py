@@ -8,6 +8,7 @@ uppercase_g = 'QWERTYUIOPASDFGHJKLZXCVBNM'
 symbols_g = '%?*-=+$#№@!~`^(){}[];:,.<>_/\\ '
 
 length = int(input('Введите количество символов пароля '))
+amount_p = int(input('Введите количество паролей для генерации ' ))
 
 i=l=u=s = True
 
@@ -22,11 +23,7 @@ if u:
 if s:
     Password_g += symbols_g
 
-for p in range(1):
+for p in range(amount_p):
     password_generate = random.sample(Password_g, length)
     print('PASSWORD:',''.join(password_generate))
-    print('Пароль сгенерирован')
-
-    while True:
-        e = input('Введите q для выхода ')
-        if e == 'q': break
+   
