@@ -11,7 +11,6 @@ def getCountStrWithoutRepetitions(charList):
     if K > N or K == 0:
         print("Недопустимая длина строки: ")
 
-
 getCountStrWithoutRepetitions(["a", "b", "c", "d", "e", "f"])
 
 
@@ -22,6 +21,5 @@ def getCountStrWithRepetitions(charList):
         print("Количество комбинаций строк с повторениями: ", N ** K)
     if K > N or K == 0:
         print("Недопустимая длина строки: ")
-
 
 getCountStrWithRepetitions(["a", "b", "c", "d", "e", "f"])
