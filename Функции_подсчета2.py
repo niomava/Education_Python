@@ -4,22 +4,20 @@ import math
 def getCountStrWithoutRepetitions(charList):
     N = len(list(charList))
     NN = math.factorial(N)
-    K = int(input("Введите конечную длину строки: "))
-    if K <= N and K != 0:
-        R = math.factorial(N - K)
-        print("Количество комбинаций строк без повторений: ", NN / (R))
-    if K > N or K == 0:
-        print("Недопустимая длина строки: ")
+    result = 0
+    for K in range(1,N+1):
+        R1 = math.factorial(N - K)
+        result += (NN / R1)
+    print("Количество комбинаций для всех длин строк без повторений: ", result)
 
-getCountStrWithoutRepetitions(["a", "b", "c", "d", "e", "f"])
+getCountStrWithoutRepetitions(["a","b", "c"])
 
 
 def getCountStrWithRepetitions(charList):
     N = len(list(charList))
-    K = int(input("Введите конечную длину строки: "))
-    if K <= N and K != 0:
-        print("Количество комбинаций строк с повторениями: ", N ** K)
-    if K > N or K == 0:
-        print("Недопустимая длина строки: ")
+    result = 0
+    for K in range(1,N+1):
+        result += N ** K
+    print("Количество комбинаций для всех длин строк с повторениями: ", result)
 
-getCountStrWithRepetitions(["a", "b", "c", "d", "e", "f"])
+getCountStrWithRepetitions(["a", "b", "c"])
