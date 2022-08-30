@@ -8,7 +8,7 @@ def getCountStrWithoutRepetitions(charList):
     for K in range(1,N+1):
         R1 = math.factorial(N - K)
         result += (NN / R1)
-    print("Количество комбинаций для всех длин строк без повторений: ", result)
+    return result
 
 getCountStrWithoutRepetitions(["a","b", "c"])
 
@@ -18,6 +18,6 @@ def getCountStrWithRepetitions(charList):
     result = 0
     for K in range(1,N+1):
         result += N ** K
-    print("Количество комбинаций для всех длин строк с повторениями: ", result)
+    return result
 
 getCountStrWithRepetitions(["a", "b", "c"])
