@@ -1,0 +1,96 @@
+import requests
+from bs4 import BeautifulSoup
+import fake_useragent
+
+fua = fake_useragent.UserAgent()
+
+headers = {
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+    "User-Agent": fua.random
+}
+URLS = "https://www.imdb.com/name/nm0000138/"
+link = "https://www.omdbapi.com/?"
+
+resp = requests.get(URLS, headers=headers)
+
+soup = BeautifulSoup(resp.text, 'html.parser')
+
+All_id = soup.find('div', class_='filmo-category-section').find_next_sibling().find_next_sibling().find_all(
+    ['div', {'class': 'filmo-row odd', 'class': 'filmo-row even'}])
+
+for ids in All_id:
+    x = ids.get('id')
+    if x == None:
+        x = 'actor-tt7428530'
+    tt = (x[6:])
+
+    for i in range(1):
+        params = [{"": link, "i": tt, "apikey": "2ced315b"}]
+        result = ' '.join([f'{key} {value}' for key, value in params[0].items()])
+        result = [result[1:]]
+        result_ind = result[0].split()
+        result_ind.extend(result[5:])
+        result_ind.insert(2, "=")
+        result_ind.insert(4, "&")
+        result_ind.insert(6, "=")
+        result_ind = ''.join(result_ind)
+        for p in result_ind:
+            r = requests.get(result_ind, headers=headers)
+        try:
+            r_json = (r.json())
+        finally:
+            films_title = r_json.get('Title')
+            films_imdbRating = r_json.get('imdbRating')
+            films_Metascore = r_json.get('Metascore')
+            films_Ratings = r_json.get('Ratings')
+
+            if films_Ratings == None:
+                n = 0
+            else:
+                n = len(films_Ratings)
+
+                if n == 1 or n == 2:
+                    films_Ratings = 0
+                if n == 3:
+                    films_Ratings = films_Ratings[n - 2]["Value"][0:-1]
+
+                if films_Ratings == []:
+                    films_Ratings = 0
+                if films_Ratings == None:
+                    films_Ratings = 0
+                if films_Ratings == list == None:
+                    films_Ratings = 0
+
+                if films_imdbRating == "N/A":
+                    films_imdbRating = 0
+                if films_imdbRating == None:
+                    films_imdbRating = 0
+
+                if films_Metascore == "N/A":
+                    films_Metascore = 0
+                if films_Metascore == None:
+                    films_Metascore = 0
+
+                else:
+                    sum_rating = (int(float(films_imdbRating) * 10) + int(films_Metascore) + int(films_Ratings))
+                    avd = int(sum_rating / 3)
+                    films_title = [films_title]
+
+                    group_p0 = []
+                    group_p1 = []
+                    group_p2 = []
+                    group_p3 = []
+                    group_p4 = []
+
+                    if avd == 0:
+                        group_p0 += (films_title + [avd])
+                    if avd != 0 and avd <= 60:
+                        group_p1 += (films_title + [avd])
+                    if avd >= 60 and avd <= 70:
+                        group_p2 += (films_title + [avd])
+                    if avd >= 70 and avd <= 80:
+                        group_p3 += (films_title + [avd])
+                    if avd >= 80:
+                        group_p4 += (films_title + [avd])
+                    else:
+                        print(" * 1 группа признания != 0 и <= 60 ",group_p1,'\n',"** 2 группа признания >= 60 и <= 70 ",group_p2,'\n',"*** 3 группа признания >= 70 и <= 80 ",group_p3,'\n',"**** 4 группа признания >= 80 ",group_p4,'\n' )
