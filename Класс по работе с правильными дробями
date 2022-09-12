@@ -26,10 +26,6 @@ class Proper_fraction():
         """Cоздание строк из данных свойства дроби в строку с конкатенацией этих строк с помощью символа / между ними"""
         return str(self.numenator) + "/" + str(self.denominator)
 
-    def show(self):
-        """Отображение дробей"""
-        print(self.numenator, "/", self.denominator)
-
     def __add__(self, value):
         """Сложение"""
         newnum = self.numenator * value.denominator + self.denominator * value.numenator
