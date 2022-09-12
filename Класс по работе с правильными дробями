@@ -5,9 +5,7 @@ class Proper_fraction():
         """Свойства дроби"""
         self.numenator = x
         self.denominator = y
-        self.reduce()
 
-    def reduce(self):
         def gcd(a, b):
             """Наибольший общий делитель для сокращения дроби"""
             while a % b != 0:
