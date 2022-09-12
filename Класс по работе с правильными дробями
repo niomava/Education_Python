@@ -5,9 +5,7 @@ class Proper_fraction():
         """Свойства дроби"""
         self.numenator = x
         self.denominator = y
-        if self.numenator >= self.denominator:
-            print("Неправильная дробь")
-
+       
     def _gcd(self,a, b):
         """Наибольший общий делитель для сокращения дроби"""
         while a % b != 0:
@@ -56,4 +54,4 @@ class Proper_fraction():
 
 Value1 = Proper_fraction(1, 4)
 Value2 = Proper_fraction(1, 2)
-print(Value1 * Value2)
+print(Value1 / Value2)
