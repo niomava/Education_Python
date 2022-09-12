@@ -5,16 +5,22 @@ class Proper_fraction():
         """Свойства дроби"""
         self.numenator = x
         self.denominator = y
-       
-    def _gcd(self,a, b):
-        """Наибольший общий делитель для сокращения дроби"""
-        while a % b != 0:
-            self._oldm = a
-            self._oldn = b
+        self.reduce()
 
-            a = self._oldn
-            b = self._oldm % self._oldn
-        return b
+    def reduce(self):
+        def gcd(a, b):
+            """Наибольший общий делитель для сокращения дроби"""
+            while a % b != 0:
+                self.oldm = a
+                self.oldn = b
+
+                a = self.oldn
+                b = self.oldm % self.oldn
+            return b
+
+        r = gcd(self.numenator, self.denominator)
+        self.numenator //= r
+        self.denominator //= r
 
     def __str__(self):
         """Cоздание строк из данных свойства дроби в строку с конкатенацией этих строк с помощью символа / между ними"""
@@ -28,30 +34,26 @@ class Proper_fraction():
         """Сложение"""
         newnum = self.numenator * value.denominator + self.denominator * value.numenator
         newden = self.denominator * value.denominator
-        result = self._gcd(newnum,newden)
-        return Proper_fraction(newnum // result, newden // result)
+        return Proper_fraction(newnum, newden)
 
     def __sub__(self, value):
         """Вычитание"""
         newnum = self.numenator * value.denominator - value.numenator * self.denominator
         newden = self.denominator * value.denominator
-        result = self._gcd(newnum,newden)
-        return Proper_fraction(newnum // result, newden // result)
+        return Proper_fraction(newnum, newden)
 
     def __mul__(self, value):
         """Умножение"""
         newnum = self.numenator * value.numenator
         newden = self.denominator * value.denominator
-        result = self._gcd(newnum,newden)
-        return Proper_fraction(newnum // result, newden // result)
+        return Proper_fraction(newnum, newden)
 
     def __truediv__(self, value):
         """Деление"""
         newnum = self.numenator * value.denominator
         newden = self.denominator * value.numenator
-        result = self._gcd(newnum,newden)
-        return Proper_fraction(newnum // result, newden // result)
+        return Proper_fraction(newnum, newden)
 
-Value1 = Proper_fraction(1, 4)
-Value2 = Proper_fraction(1, 2)
-print(Value1 / Value2)
+Value1 = Proper_fraction(12,20)
+Value2 = Proper_fraction(12,20)
+print(Value1 + Value2)
