@@ -1,3 +1,5 @@
+import math
+
 class Proper_fraction():
     """Класс по работе с правильными дробями"""
 
@@ -5,20 +7,9 @@ class Proper_fraction():
         """Свойства дроби"""
         self.numenator = x
         self.denominator = y
-
-        def gcd(a, b):
-            """Наибольший общий делитель для сокращения дроби"""
-            while a % b != 0:
-                self.oldm = a
-                self.oldn = b
-
-                a = self.oldn
-                b = self.oldm % self.oldn
-            return b
-
-        r = gcd(self.numenator, self.denominator)
-        self.numenator //= r
-        self.denominator //= r
+        self.r = math.gcd(x, y)
+        self.numenator //= self.r
+        self.denominator //= self.r
 
     def __str__(self):
         """Cоздание строк из данных свойства дроби в строку с конкатенацией этих строк с помощью символа / между ними"""
@@ -50,4 +41,4 @@ class Proper_fraction():
 
 Value1 = Proper_fraction(12,20)
 Value2 = Proper_fraction(12,20)
-print(Value1 + Value2)
+print(Value1 / Value2)
