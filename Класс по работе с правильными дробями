@@ -5,11 +5,9 @@ class Proper_fraction():
 
     def __init__(self, x, y):
         """Свойства дроби"""
-        self.numenator = x
-        self.denominator = y
         self.r = math.gcd(x, y)
-        self.numenator //= self.r
-        self.denominator //= self.r
+        self.numenator = x // self.r
+        self.denominator = y // self.r
 
     def __str__(self):
         """Cоздание строк из данных свойства дроби в строку с конкатенацией этих строк с помощью символа / между ними"""
