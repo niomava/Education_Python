@@ -44,6 +44,7 @@ class fraction_extending (Proper_fraction):
         self.exponent = exponent
 
     def pow_fraction(self):
+         """Возведение в степень"""
          number = self.numenator/self.denominator
          degree = math.pow(number, float(self.exponent))
          return degree
