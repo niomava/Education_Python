@@ -35,7 +35,8 @@ class Test_Class_fraction(unittest.TestCase):
         num = x//s
         deno = y // s
         self.assertEqual(Value.__dict__['numenator'],num)
-        self.assertEqual(Value.__dict__['denominator'], deno)
+       self.assertEqual(Value.__dict__['denominator'], deno)
+       
     def test_add(self):
         """Проверка сложения дробей для метода __add__"""
         s = (Value+Value2).__dict__["numenator"]/(Value+Value2).__dict__["denominator"]
