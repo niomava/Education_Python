@@ -1,0 +1,66 @@
+import unittest
+import math
+from Class_fraction import Proper_fraction
+from Class_fraction import fraction_extending
+
+x = 12
+y = 20
+
+x1 = 12
+y2 = 20
+
+exponent = 2
+
+Value = Proper_fraction(x,y)
+Value2 = Proper_fraction(x1,y2)
+ext = fraction_extending(x,y,exponent)
+
+r = math.gcd(x, y)
+numenator = x // r
+denominator = y // r
+
+class Test_Class_fraction(unittest.TestCase):
+    """Тесты для класса Class_fraction"""
+    def test_type(self):
+        """""Проверка на тип данных"""
+        self.assertIsInstance(x,int )
+        self.assertIsInstance(y,int)
+        self.assertIsInstance(exponent, int)
+
+    def test_reduction_init(self):
+        """Проверка сокращения значений и наличия ключей и значений для метода __init__"""
+        self.assertEqual(Value.__dict__,{'r': r, 'numenator': numenator, 'denominator': denominator})
+
+    def test_add(self):
+        """Проверка сложения дробей для метода __add__"""
+        s = (Proper_fraction.__add__(Value,Value2)).__dict__
+        s1 = (Value + Value2).__dict__
+        self.assertEqual(s,s1)
+
+    def test_sub(self):
+        """Проверка вычитания дробей для метода __sub__"""
+        s = (Proper_fraction.__sub__(Value,Value2)).__dict__
+        s1 = (Value - Value2).__dict__
+        self.assertEqual(s,s1)
+
+    def test_mul(self):
+        """Проверка умножения дробей для метода __mul__"""
+        s = (Proper_fraction.__mul__(Value, Value2)).__dict__
+        s1 = (Value * Value2).__dict__
+        self.assertEqual(s, s1)
+
+    def test_truediv(self):
+        """Проверка деления дробей для метода __truediv__"""
+        s = (Proper_fraction.__truediv__(Value, Value2)).__dict__
+        s1 = (Value / Value2).__dict__
+        self.assertEqual(s, s1)
+
+    def test_pow_fraction(self):
+        """Проверка возведения дробей в степень для метода __pow_fraction__"""
+        s = ext.pow_fraction()
+        s1 = numenator/denominator
+        s2 = math.pow(s1, float(exponent))
+        self.assertEqual(s,s2)
+
+if __name__ == "__name__":
+    unittest.main()
