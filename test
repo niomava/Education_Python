@@ -1,0 +1,73 @@
+import unittest
+import math
+from Class_fraction import Proper_fraction
+from Class_fraction import fraction_extending
+
+x = 12
+y = 20
+
+x1 = 12
+y2 = 20
+
+exponent = 2
+
+Value = Proper_fraction(x,y)
+Value2 = Proper_fraction(x1,y2)
+ext = fraction_extending(x,y,exponent)
+
+r = math.gcd(x, y)
+numenator = x // r
+denominator = y // r
+
+number = numenator/denominator
+
+class Test_Class_fraction(unittest.TestCase):
+    """Тесты для класса Class_fraction"""
+    def test_type(self):
+        """""Проверка на тип данных"""
+        self.assertIsInstance(x,int )
+        self.assertIsInstance(y,int)
+        self.assertIsInstance(exponent, int)
+
+    def test_reduction_init(self):
+        """Проверка сокращения значений и наличия ключей и значений для метода __init__"""
+        result = Value
+        s = result.__dict__['r']
+        num = x//s
+        deno = y // s
+        s1 = num/deno
+        s2 = 0.6
+        self.assertEqual(s1,s2)
+
+
+    def test_add(self):
+        """Проверка сложения дробей для метода __add__"""
+        s = (Value+Value2).__dict__["numenator"]/(Value+Value2).__dict__["denominator"]
+        s1 = 0.6 + 0.6
+        self.assertEqual(s,s1)
+
+    def test_sub(self):
+        """Проверка вычитания дробей для метода __sub__"""
+        s = (Value-Value2).__dict__["numenator"]/(Value-Value2).__dict__["denominator"]
+        s1 = 0.6 - 0.6
+        self.assertEqual(s,s1)
+
+    def test_mul(self):
+        """Проверка умножения дробей для метода __mul__"""
+        s = (Value*Value2).__dict__["numenator"]/(Value*Value2).__dict__["denominator"]
+        s1 = 0.6 * 0.6
+        self.assertEqual(s, s1)
+
+    def test_truediv(self):
+        """Проверка деления дробей для метода __truediv__"""
+        s = (Value/Value2).__dict__["numenator"]/(Value/Value2).__dict__["denominator"]
+        s1 = 0.6 / 0.6
+        self.assertEqual(s, s1)
+
+    def test_pow_fraction(self):
+        """Проверка возведения дробей в степень для метода __pow_fraction__"""
+        s = math.pow(number, float(exponent))
+        self.assertEqual(s,0.36)
+
+if __name__ == "__name__":
+    unittest.main()
