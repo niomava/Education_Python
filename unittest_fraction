@@ -1,69 +1,90 @@
 import unittest
-import math
 from Class_fraction import Proper_fraction
 from Class_fraction import fraction_extending
 
-x = 12
-y = 20
-
-x1 = 12
-y2 = 20
-
-exponent = 2
-
-Value = Proper_fraction(x,y)
-Value2 = Proper_fraction(x1,y2)
-ext = fraction_extending(x,y,exponent)
-
-r = math.gcd(x, y)
-numenator = x // r
-denominator = y // r
-
-number = numenator/denominator
-
 class Test_Class_fraction(unittest.TestCase):
+
+    number_in = 12
+    denominator_in = 20
+
+    number_out = 3
+    denominator_out = 5
+
+    number_in_2 = 17
+    denominator_in_2 = 42
+
+    exponent = 2
+
     """Тесты для класса Class_fraction"""
     def test_type(self):
         """""Проверка на тип данных"""
-        self.assertIsInstance(x,int )
-        self.assertIsInstance(y,int)
-        self.assertIsInstance(exponent, int)
+        self.assertIsInstance(self.number_in,int )
+        self.assertIsInstance(self.denominator_in,int)
+        self.assertIsInstance(self.number_in_2, int)
+        self.assertIsInstance(self.denominator_in_2, int)
+        self.assertIsInstance(self.exponent, int)
+
 
     def test_reduction_init(self):
         """Проверка сокращения значений и наличия ключей и значений для метода __init__"""
 
-        s1 = Value.__dict__["numenator"]/Value.__dict__["denominator"]
-        s2 = 0.6
-        self.assertEqual(s1,s2)
+        s1 = Proper_fraction(self.number_in, self.denominator_in)
+        self.assertEqual(s1.numenator, self.number_out)
+        self.assertEqual(s1.denominator, self.denominator_out)
+
 
     def test_add(self):
         """Проверка сложения дробей для метода __add__"""
-        s = (Value+Value2).__dict__["numenator"]/(Value+Value2).__dict__["denominator"]
-        s1 = 0.6 + 0.6
-        self.assertEqual(s,s1)
+
+        add_numbers_out = 211
+        add_numbers_out_2 = 210
+
+        s = Proper_fraction(self.number_in, self.denominator_in) + Proper_fraction(self.number_in_2, self.denominator_in_2)
+        self.assertEqual(s.numenator, add_numbers_out)
+        self.assertEqual(s.denominator, add_numbers_out_2)
 
     def test_sub(self):
         """Проверка вычитания дробей для метода __sub__"""
-        s = (Value-Value2).__dict__["numenator"]/(Value-Value2).__dict__["denominator"]
-        s1 = 0.6 - 0.6
-        self.assertEqual(s,s1)
+
+        add_numbers_out = 41
+        add_numbers_out_2 = 210
+
+        s = Proper_fraction(self.number_in, self.denominator_in) - Proper_fraction(self.number_in_2, self.denominator_in_2)
+        self.assertEqual(s.numenator, add_numbers_out)
+        self.assertEqual(s.denominator, add_numbers_out_2)
+
+
 
     def test_mul(self):
         """Проверка умножения дробей для метода __mul__"""
-        s = (Value*Value2).__dict__["numenator"]/(Value*Value2).__dict__["denominator"]
-        s1 = 0.6 * 0.6
-        self.assertEqual(s, s1)
+
+        add_numbers_out = 17
+        add_numbers_out_2 = 70
+
+        s = Proper_fraction(self.number_in, self.denominator_in) * Proper_fraction(self.number_in_2,
+                                                                                   self.denominator_in_2)
+        self.assertEqual(s.numenator, add_numbers_out)
+        self.assertEqual(s.denominator, add_numbers_out_2)
 
     def test_truediv(self):
         """Проверка деления дробей для метода __truediv__"""
-        s = (Value/Value2).__dict__["numenator"]/(Value/Value2).__dict__["denominator"]
-        s1 = 0.6 / 0.6
-        self.assertEqual(s, s1)
+
+        add_numbers_out = 126
+        add_numbers_out_2 = 85
+
+        s = Proper_fraction(self.number_in, self.denominator_in) / Proper_fraction(self.number_in_2,
+                                                                               self.denominator_in_2)
+        self.assertEqual(s.numenator, add_numbers_out)
+        self.assertEqual(s.denominator, add_numbers_out_2)
 
     def test_pow_fraction(self):
         """Проверка возведения дробей в степень для метода __pow_fraction__"""
-        s = math.pow(number, float(exponent))
-        self.assertEqual(s,0.36)
+
+        pow_out = 0.36
+
+        s = fraction_extending(self.number_in, self.denominator_in, self.exponent).pow_fraction()
+        self.assertEqual(s, pow_out)
+
 
 if __name__ == "__name__":
     unittest.main()
