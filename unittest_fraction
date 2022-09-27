@@ -6,7 +6,7 @@ from Class_fraction import fraction_extending
 x = 12
 y = 20
 
-x1 = 22
+x1 = 12
 y2 = 20
 
 exponent = 2
@@ -31,31 +31,35 @@ class Test_Class_fraction(unittest.TestCase):
 
     def test_reduction_init(self):
         """Проверка сокращения значений и наличия ключей и значений для метода __init__"""
-        s = Value.__dict__['r']
-        num = x//s
-        deno = y // s
-        self.assertEqual(Value.__dict__['numenator'],num)
-       self.assertEqual(Value.__dict__['denominator'], deno)
-       
+
+        s1 = Value.__dict__["numenator"]/Value.__dict__["denominator"]
+        s2 = 0.6
+        self.assertEqual(s1,s2)
+
+
     def test_add(self):
         """Проверка сложения дробей для метода __add__"""
         s = (Value+Value2).__dict__["numenator"]/(Value+Value2).__dict__["denominator"]
-        self.assertEqual(s,1.7)
+        s1 = 0.6 + 0.6
+        self.assertEqual(s,s1)
 
     def test_sub(self):
         """Проверка вычитания дробей для метода __sub__"""
         s = (Value-Value2).__dict__["numenator"]/(Value-Value2).__dict__["denominator"]
-        self.assertEqual(s,-0.5)
+        s1 = 0.6 - 0.6
+        self.assertEqual(s,s1)
 
     def test_mul(self):
         """Проверка умножения дробей для метода __mul__"""
         s = (Value*Value2).__dict__["numenator"]/(Value*Value2).__dict__["denominator"]
-        self.assertEqual(s, 0.66)
+        s1 = 0.6 * 0.6
+        self.assertEqual(s, s1)
 
     def test_truediv(self):
         """Проверка деления дробей для метода __truediv__"""
         s = (Value/Value2).__dict__["numenator"]/(Value/Value2).__dict__["denominator"]
-        self.assertEqual(s, 0.5454545454545454)
+        s1 = 0.6 / 0.6
+        self.assertEqual(s, s1)
 
     def test_pow_fraction(self):
         """Проверка возведения дробей в степень для метода __pow_fraction__"""
