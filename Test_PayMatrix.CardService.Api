@@ -1,0 +1,84 @@
+import pytest
+import fake_useragent
+from requests import request
+from datetime import datetime
+import json
+from configuration_PayMatrix_CardService import Base_URL
+
+
+# constants
+SPACE = " "
+CLIENT_ID = "credit_card_service_client"
+CLIENT_SECRET = "KDjCNQTDTM1nhlyNKqVGgOQyOTdhQcl6"
+fua = fake_useragent.UserAgent()
+
+"""Авторизация"""
+url = "https://sso.paymatrix.ru/realms/master/protocol/openid-connect/token"
+data = {"grant_type": "client_credentials"}
+response = request("POST", url, auth=(CLIENT_ID, CLIENT_SECRET), data=data,  verify=False)
+access_token = response.json()["access_token"]
+token_type = response.json()["token_type"]
+authorization = token_type + SPACE + access_token
+
+
+def test_authorize_values_count():
+    assert len(data) == 1, "В объекте 1 значение"
+
+def test_authorize_status_code():
+    assert response.status_code == 200, "Код выполнения запроса 200"
+
+
+"""Проверка наличия карты в системе"""
+
+Value_CreditCardId = "6e51a277-0555-459c-b81f-1dfee03869e6"
+Value_PageNumber = 0
+Value_PageSize = 0
+PN = "PageNumber="
+PS = "PageSize="
+a = "&"
+EVENT_ID = "api/AccessLogs?"
+now = datetime.now().isoformat()
+url = f"{Base_URL}{EVENT_ID}{Value_CreditCardId}{a}{PN}{Value_PageNumber}{a}{PS}{Value_PageSize}"
+headers = {"Authorization": authorization, "User-Agent": fua.random, "Accept": "text/plain"}
+response = request("GET", url, headers=headers)
+
+def test_AccessLogs_headers():
+    assert len(response.headers) == 4, "В объекте 4 значения"
+
+def test_AccessLogs_headers_content_type():
+    assert response.headers['Content-Type'] == 'application/json; charset=utf-8', "Хедер Content-Type"
+
+def test_AccessLogs_Query_Params():
+    assert isinstance(Value_CreditCardId,(str)), "Параметр CreditCardId строка"
+    assert isinstance(Value_PageNumber, (int)), "Параметр PageNumber число"
+    assert isinstance(Value_PageSize, (int)), "Параметр PageSize число"
+
+def test_AccessLogs_status_code():
+    assert response.status_code == 200, "Код выполнения запроса 200"
+
+
+"""Создание карты"""
+
+EVENT_ID = "api/CreditCard"
+now = datetime.now().isoformat()
+url = f"{Base_URL}{EVENT_ID}"
+headers = {"Authorization" : authorization, "User-Agent": fua.random, "Accept": "text/plain", "Content-Type": "application/json"}
+body = {"pan": "4182600317433042","expiry": "01/23","owner": 0}
+response = request("POST", url, headers=headers, data=json.dumps(body))
+
+def test_CreditCard_headers():
+    assert len(response.headers) == 4, "В объекте 4 значения"
+
+def test_CreditCard_lenbody():
+    assert len(body) == 3, "В body 3 значения"
+
+def test_CreditCard_headers_content_type():
+    assert response.headers['Content-Type'] == 'application/json; charset=utf-8', "Хедер Content-Type"
+
+def test_CreditCard_Body():
+    assert isinstance(body["pan"],(str)), "Поле pan строка"
+    assert isinstance(body["expiry"], (str)), "Поле expiry строка"
+    assert isinstance(body["owner"], (int)), "Поле owner число"
+
+def test_CreditCard_status_code():
+    assert response.status_code == 200, "Код выполнения запроса 200"
