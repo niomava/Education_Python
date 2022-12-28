@@ -8,9 +8,9 @@ import json
 # constants
 SPACE = " "
 CLIENT_ID = "credit_card_service_client"
-CLIENT_SECRET = "KDjCNQTDTM1nhlyNKqVGgOQyOTdhQcl6"
+CLIENT_SECRET = "******"
 fua = fake_useragent.UserAgent()
-Base_URL = "http://65.108.213.119/"
+Base_URL = "http://65.108.***.***/"
 
 """Авторизация"""
 url = "https://sso.paymatrix.ru/realms/master/protocol/openid-connect/token"
