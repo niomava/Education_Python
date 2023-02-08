@@ -7,13 +7,13 @@ import json
 
 # constants
 SPACE = " "
-CLIENT_ID = "credit_card_service_client"
+CLIENT_ID = "***********"
 CLIENT_SECRET = "******"
 fua = fake_useragent.UserAgent()
 Base_URL = "http://65.108.***.***/"
 
 """Авторизация"""
-url = "https://sso.paymatrix.ru/realms/master/protocol/openid-connect/token"
+url = "https://***************"
 data = {"grant_type": "client_credentials"}
 response_auth = request("POST", url, auth=(CLIENT_ID, CLIENT_SECRET), data=data, verify=False)
 access_token = response_auth.json()["access_token"]
